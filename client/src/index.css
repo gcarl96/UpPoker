@@ -1,0 +1,174 @@
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #666;
+  padding: 0 10px;
+  border-radius: 4px;
+  transition: all .3s ease;
+}
+
+button:hover {
+  background-color: rgb(87, 64, 255);
+  color: #fff;
+  border-color: rgb(87, 64, 255);
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 2px;
+}
+
+.title {
+  color: rgb(87, 64, 255);
+  font-size: 2.80em;
+  font-family: 'Zilla Slab Highlight', sans-serif;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 40px;
+}
+
+::placeholder {
+  color: #b2b2b2
+}
+
+/* .game-container {
+  background-image: url("./resources/Table/Table.png");
+  background-repeat: no-repeat;
+} */
+
+.board-container {
+  background-image: url("./resources/Table/Table.png");
+  background-size: 100% 100%;
+  position: relative;
+  /* z-index: -100; */
+}
+
+div[class^="seat-"][class$="-current"] {
+  background: lightblue;
+}
+
+div[class^="seat-"][class$="-fold"] {
+  background: grey;
+}
+
+div[class^="seat-"] {
+  width: 250px;
+  height: 100px;
+  background: #a84909;
+  border-radius: 40px;
+  text-align: center;
+}
+
+div[class^="seat-0-container"] {
+  margin-top: 50px;
+}
+
+div[class^="seat-1-container"] {
+  margin-top: 0px;
+}
+
+div[class^="seat-2-container"] {
+  margin-top: 0px;
+}
+
+div[class^="seat-3-container"] {
+  margin-top: -40px;
+}
+
+div[class^="seat-4-container"]{
+  margin-top: 0px
+}
+
+div[class^="seat-5-container"] {
+  margin-top: 0px
+}
+
+
+
+.player-name {
+  margin: 0px;
+  margin-top: -25px;
+}
+
+.player-chip-count {
+  margin: 0px;
+}
+
+.card {
+  max-width: 3rem;
+  position: relative;
+  /* z-index: -100; */
+  top: -25px;
+}
+
+.card-selected {
+  max-width: 3rem;
+  position: relative;
+  /* z-index: -100; */
+  top: -25px;
+  border: 1px solid red;
+}
+
+.pot-value {
+  position: absolute;
+  top: 35%; left: 46%;
+  transform: translate(20px,20px);
+}
+.community-cards {
+  position: absolute;
+  left: 46%;
+  transform: translate(-30px,-20px);
+}
+
+.player-bet-amount {
+  margin: 0px;
+}
+
+.position-label {
+  margin: 0px;
+}
+
+.player-0-action-info-container {
+  transform: translate(100px, -65px);
+  position: absolute;
+}
+
+.player-1-action-info-container {
+  transform: translate(250px, -30px);
+  position: absolute;
+}
+
+.player-2-action-info-container {
+  transform: translate(250px, 80px);
+  position: absolute;
+}
+
+.player-3-action-info-container {
+  transform: translate(60px, 80px);
+  position: absolute;
+}
+
+.player-4-action-info-container {
+  transform: translate(-50px, 40px);
+  position: absolute;
+}
+
+.player-5-action-info-container {
+  transform: translate(-30px, -20px);
+  position: absolute;
+}
+
+.winning-message-card {
+  width: 400px;
+  height: 40px;
+  align-content: center;
+  transform: translate(50%, 300%);
+  text-align: center;
+}

@@ -1,0 +1,20 @@
+.ControlBar {
+    border: 1px solid #666;
+    padding: 10px 0px;
+    overflow: hidden;
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+  
+  .ControlBar #username-input {
+    font-size: 1em;
+    margin-left: 10px;
+    width: 180px;
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid #666;
+    padding: 4px;
+    border-radius: 4px;
+  }
