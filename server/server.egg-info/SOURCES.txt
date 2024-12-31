@@ -1,4 +1,3 @@
-MANIFEST.in
 setup.py
 server/__init__.py
 server/server.py

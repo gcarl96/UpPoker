@@ -1,8 +1,8 @@
 from .GameData import GameData
 from .PlayerData import PlayerData
 import random
-from treys import Evaluator, Card
 from itertools import combinations
+import eval7
 
 class GameController:
 
@@ -14,7 +14,6 @@ class GameController:
 
 		self.deck = []
 		self.game = GameData()
-		self.evaluator = Evaluator()
 
 	#Called externally
 	def PlayerLeaves(self,client_id):
@@ -211,8 +210,8 @@ class GameController:
 			pot += min_stack * len([player for _, player in self.game.ActivePlayers().items() if player.invested > 0])
 
 			print(f"Best hands: {[player.handValue for _, player in self.game.ActivePlayers().items()]}")
-			best_hand = min([player.handValue for _, player in self.game.ActivePlayers().items() if not player.action == "Fold" and player.invested > 0])
-			print(f"The best hand was: {best_hand} - {self.evaluator.class_to_string(self.evaluator.get_rank_class(best_hand))}")
+			best_hand = max([player.handValue for _, player in self.game.ActivePlayers().items() if not player.action == "Fold" and player.invested > 0])
+			print(f"The best hand was: {best_hand} - {eval7.handtype(best_hand)}")
 			num_winners = len([player for _, player in self.game.ActivePlayers().items() if player.handValue == best_hand and not player.action == "Fold" and player.invested > 0])
 			for player in [player for _, player in self.game.ActivePlayers().items() if player.handValue == best_hand and not player.action == "Fold" and player.invested > 0]:
 				print(f"{player.name} is a winner of {pot / num_winners}")
@@ -227,10 +226,10 @@ class GameController:
 
 
 		for _, player in self.game.ActivePlayers().items():
-			print(f"{player.name} wins {player.result} with {self.evaluator.class_to_string(self.evaluator.get_rank_class(player.handValue))}")
+			print(f"{player.name} wins {player.result} with {eval7.handtype(player.handValue)}")
 			player.chips += player.result
 			if player.result > 0:
-				self.game.winningMessages.append(f"{player.name} wins {player.result} with a {self.evaluator.class_to_string(self.evaluator.get_rank_class(player.handValue))}")
+				self.game.winningMessages.append(f"{player.name} wins {player.result} with a {eval7.handtype(player.handValue)}")
 			player.result = 0
 			player.invested = 0
 
@@ -243,19 +242,19 @@ class GameController:
 		handCombs = combinations(hand_cards, 2)
 		handCombs = [list(comb) for comb in list(handCombs)]
 
-		max_score = 8000
+		max_score = -1
 		best_hand = None
 		for hand in handCombs:
-			for board in boardCombs:
-				formatted_board = [Card.new(str(card[0])+str(card[1]).lower()) for card in board]
-				formatted_hand = [Card.new(str(card[0])+str(card[1]).lower()) for card in hand]
-				
-				handval = self.evaluator.evaluate(formatted_board, formatted_hand)
-				if (handval < max_score):
+			# for board in boardCombs:
+				formatted_board = [eval7.Card(str(card[0])+str(card[1]).lower()) for card in board_cards]
+				formatted_hand = [eval7.Card(str(card[0])+str(card[1]).lower()) for card in hand]
+
+				handval = eval7.evaluate(formatted_board + formatted_hand)
+				if (handval > max_score):
 					max_score = handval
-					best_hand = board + hand
+					best_hand = hand
 		
-		print(f"{max_score} - {best_hand}")
+		print(f"{max_score} - {best_hand} - {eval7.handtype(max_score)}")
 		return max_score
 
 	#Called internally, by CheckRound()
